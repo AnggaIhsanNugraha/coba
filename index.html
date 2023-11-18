@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Aplikasi Laundry</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="manifest" href="manifest.json">
+
+</head>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="bg"></div>
+        <div id="overlay"></div>
+        <div id="main">
+            <!-- Header -->
+            <header id="header">
+                <h1 style="text-align: center;">APLIKASI LAUNDRY ANGGA</h1>
+                <fieldset id="laundryForm">
+                    <p><label for="nama">Masukan Nama</label></p>
+                    <p><input type="text" id="nama" name="nama"></p>
+                    <label for="type">Pilih Jenis yang mau Laundry:</label>
+                    <div style="display: inline-block; vertical-align: middle;">
+                        <select id="type" name="type">
+                            <option value="pakaian">Pakaian</option>
+                            <option value="bedcover">Bedcover</option>
+                            <option value="karpet">Karpet</option>
+                        </select>
+                    </div>
+                    <p><label for="type">Masukan Berat (Kg)</label></p>
+                    <p><input type="number" id="berat" name="berat"></p>
+                    <button type="button" style="text-align: center;" onclick="addOrder()">Tambah Pesanan</button>
+                </fieldset>
+                <h2 style="text-align: center;">Daftar Pesanan</h2>
+                <div style="text-align: center;">
+                    <table id="listorderan" style="margin: 0 auto;">
+                    </table>
+                </div>
+                <br />
+                <div id="totalpembayaran"></div>
+                <div id="kembalian"></div>
+                <br />
+                <form id="paymentForm" onsubmit="event.preventDefault(); calculatekembalian()">
+                    <p><label for="amountPaid">Jumlah Bayar:</label></p>
+                    <p><input type="number" id="amountPaid" name="amountPaid" p><button type="submit">Hitung
+                            Kembalian</button></p>
+                </form>
+                <br />
+            </header>
+        </div>
+    </div>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function (registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+    <script>
+        window.onload = function () { document.body.classList.remove('is-preload'); }
+        window.ontouchmove = function () { return false; }
+        window.onorientationchange = function () { document.body.scrollTop = 0; }
+    </script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/register.js"></script>
+    <div class="container">
+        <h4>CATATAN</h4>
+        <p>Pakaian 15rb/kg lebih dari 5kg gratis 1Kg</p>
+        <p>Bedcover 100rb/Kg lebih dari 3 gratis 1Kg</p>
+        <p>Karpet 150rb/Kg</p>
+    </div>
+</body>
+
+</html>
